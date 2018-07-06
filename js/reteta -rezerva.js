@@ -1,12 +1,27 @@
-
 function chooseArticles(categ) {
 
-		generateInterior()
+    if (categ == "retete") {
+        //  console.log("retete")
+        generateInterior()
         $.get('http://smart-shopper.ro/retete', data => {
             console.log(data);
             var articole = data;
-            listingRetete(articole, categ)
+            listingRetete(articole, "retete")
         });
+
+
+    } else {
+        generateInterior()
+        //  console.log("travel")
+        $.get('http://smart-shopper.ro/retete', data => {
+            console.log(data);
+            var articole = data;
+            listingRetete(articole, "travel")
+        });
+    }
+
+
+
 
 }
 
@@ -68,7 +83,6 @@ $("html, body").animate({ scrollTop: 0 }, "slow");
         var random1 = Math.floor(Math.random() * articole.length)
         var random2 = Math.floor(Math.random() * articole.length)
         var random3 = Math.floor(Math.random() * articole.length)
-        var random=[random1, random2, random3]
         //  console.log(random1, random2, random3)
         var index = articole.findIndex(x => x.id == id);
 
@@ -150,37 +164,56 @@ $("html, body").animate({ scrollTop: 0 }, "slow");
                                  <div class="comentarii">
                                     <div class="coment_label">citeste si:</div>
                                     <div class="articles_related">
-                                       <div class="row">`
-                                       for(var x=0; x< random.length; x++){
-                                       	listing.innerHTML+=`
-                                       	<div class="col-md-6">
+                                       <div class="row">
+                                          <div class="col-md-6">
                                              <div class="stire_art">
                                                 <div class="foto_more">
-                                                   <a onclick="retetaDetalii('` + articole[random[x]].id + `')"><img src="img/` +articole[random[x]].poza + `"></a>
+                                                   <a onclick="retetaDetalii('` + articole[random1].id + `')"><img src="img/` + articole[random1].poza + `"></a>
                                                 </div>
-                                                <div class="titlu_more"><a onclick="retetaDetalii('` + articole[random[x]].id + `')">
-                                                ` + articole[random[x]].titlu + `</a></div>
-                                                <div class="data padd_l_15"> 
-
-
-                                                 <img src="img/calendar.jpg" style="float: left;margin-right: 5px;margin-top: 3px;">
-                                                   <p>${new Date(articole[random[x]].data).getDate()} ${luni[date2.getMonth()]} ${date2.getFullYear()}  - ${articole[random[x]].categoria}</p>
+                                                <div class="titlu_more"><a onclick="retetaDetalii('` + articole[random1].id + `')">
+                                                ` + articole[random1].titlu + `</a></div>
+                                                <div class="data padd_l_15">
+                                                   <img src="img/calendar.jpg">
+                                                   <p>${new Date(articole[random1].data).getDate()} ${luni[date2.getMonth()]} ${date2.getFullYear()}  - ${articole[random1].categoria}</p>
                                                    <div class="clear"></div>
                                                 </div>
                                              </div>
                                           </div>
-                                       	`
-                                       }
-listing.innerHTML+=`
-										<div class="col-md-6">
+                                          <div class="col-md-6">
                                              <div class="banner_related">
                                                 <img src="img/banner_300.jpg">
                                              </div>
                                           </div>
-                                          <div class="clear"></div>
-                                       
-
-
+                                       </div>
+                                       <div class="row">
+                                          <div class="col-md-6">
+                                             <div class="stire_art">
+                                                <div class="foto_more">
+                                                   <a onclick="retetaDetalii('` + articole[random2].id + `')"><img src="img/` + articole[random2].poza + `"></a>
+                                                </div>
+                                                <div class="titlu_more"><a onclick="retetaDetalii('` + articole[random2].id + `')">
+                                                ` + articole[random2].titlu + `</a></div>
+                                                <div class="data padd_l_15">
+                                                   <img src="img/calendar.jpg">
+                                                   <p>${new Date(articole[random2].data).getDate()} ${luni[date2.getMonth()]} ${date2.getFullYear()}  - ${articole[random2].categoria}</p>
+                                                   <div class="clear"></div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                             <div class="stire_art">
+                                                <div class="foto_more">
+                                                   <a onclick="retetaDetalii('` + articole[random3].id + `')"><img src="img/` + articole[random3].poza + `"></a>
+                                                </div>
+                                                <div class="titlu_more"><a onclick="retetaDetalii('` + articole[random3].id + `')">
+                                                ` + articole[random3].titlu + `</a></div>
+                                                <div class="data padd_l_15">
+                                                   <img src="img/calendar.jpg">
+                                                   <p>${new Date(articole[random3].data).getDate()} ${luni[date2.getMonth()]} ${date2.getFullYear()}  - ${articole[random3].categoria}</p>
+                                                   <div class="clear"></div>
+                                                </div>
+                                             </div>
+                                          </div>
                                        </div>
                                     </div>
                                  </div>
@@ -305,21 +338,21 @@ function listingRetete(articole, categorie) {
    var recordsPerPage = 6; // user input of hwo many records to display per page
    var totalRecords; // length of the data object
 
+if(categorie=="retete"){
 
 
-
-displayTable(1, categorie);
+displayTable(1, "retete");
 
 
 function displayTable(pageNum, categorie){
  // pageNum=1
-  personData=categorie=="retete"?reteteArr:travelArr
+  personData=reteteArr
   console.log("personData" + personData)
-  totalRecords = (categorie=="retete"?reteteArr:travelArr).length;
+  totalRecords = reteteArr.length;
   console.log("totalRecords "+ totalRecords)
   var startIndex = (pageNum-1) * recordsPerPage;
   var endIndex = startIndex + recordsPerPage;
-  var pageWisePersonData = (categorie=="retete"?reteteArr:travelArr).slice(startIndex,endIndex);
+  var pageWisePersonData = reteteArr.slice(startIndex,endIndex);
   listing.innerHTML = "";
   for(var i = 0; i < pageWisePersonData.length; i++){
     var date2 = new Date(pageWisePersonData[i].data)
@@ -343,6 +376,11 @@ function displayTable(pageNum, categorie){
 
 
 
+
+
+
+
+
 }
 var paging = document.createElement("div");
 paging.id = "paginare";
@@ -360,9 +398,7 @@ var list = "";
     }
     document.querySelector(".pagination").innerHTML=list;
     //add active class to the first pagination link
-
-
-      document.querySelector("#pageList li a").classList.add("active")
+     // document.querySelector("ul li a:first").classList.add("active")
     // always show the first page to user
    // displayTable(1, categorie);
 
@@ -374,16 +410,88 @@ document.querySelector(".pagination").addEventListener("click", function(event){
        //get the text from the button that is clicked
        var pageNum = parseInt(event.target.innerText);
        console.log(pageNum )
-       var allLinks=document.querySelectorAll("#pageList li a")
-       for(var x=0; x< allLinks.length; x++){
-       	allLinks[x].classList.remove("active")
-
-       }
-       event.target.classList.add("active")
        // $('ul li a.active').removeClass('active');
        // $(e.target).addClass("active");
-       displayTable(pageNum, categorie);
+       displayTable(pageNum, "retete");
    });
+
+}else{
+
+displayTable(1, "travel");
+
+
+function displayTable(pageNum, categorie){
+ // pageNum=1
+  personData=travelArr
+  console.log("personData" + personData)
+  totalRecords = travelArr.length;
+  console.log("totalRecords "+ totalRecords)
+  var startIndex = (pageNum-1) * recordsPerPage;
+  var endIndex = startIndex + recordsPerPage;
+  var pageWisePersonData = travelArr.slice(startIndex,endIndex);
+  listing.innerHTML = "";
+  for(var i = 0; i < pageWisePersonData.length; i++){
+    var date2 = new Date(pageWisePersonData[i].data)
+
+              listing.innerHTML += `
+     <div class="col-md-${i == 0 || i == 3?12:6}">
+           <div class="stire mb20">
+              <div class="foto">
+                 <a onclick="retetaDetalii('` + pageWisePersonData[i].id + `')"><img src="img/${pageWisePersonData[i].poza}"></a>
+              </div>
+              <div class="titlu"><a onclick="retetaDetalii('` + pageWisePersonData[i].id + `')">${pageWisePersonData[i].titlu}</a></div>
+              <div class="data">
+                 <img src="img/calendar.jpg">
+                 <p>${new Date(pageWisePersonData[i].data).getDate()} ${luni[date2.getMonth()]} ${date2.getFullYear()}  - ${pageWisePersonData[i].categoria}</p>
+                 <div class="clear"></div>
+              </div>
+           </div>
+      </div>
+      `
+     }
+
+
+
+
+
+
+
+
+}
+var paging = document.createElement("div");
+paging.id = "paginare";
+paging.classList.add("paging");
+paging.innerHTML = `
+<ul class="pagination" id="pageList">
+    </ul>
+`
+listare.appendChild(listing);
+listare.appendChild(paging);
+var list = "";
+    var totalPages = Math.ceil(totalRecords/recordsPerPage);
+    for(var i = 1; i <= totalPages; i++){
+      list += "<li><a href='#'>"+ i +"</a></li>";
+    }
+    document.querySelector(".pagination").innerHTML=list;
+    //add active class to the first pagination link
+     // document.querySelector("ul li a:first").classList.add("active")
+    // always show the first page to user
+   // displayTable(1, categorie);
+
+
+
+document.querySelector(".pagination").addEventListener("click", function(event){
+
+
+       //get the text from the button that is clicked
+       var pageNum = parseInt(event.target.innerText);
+       console.log(pageNum )
+       // $('ul li a.active').removeClass('active');
+       // $(e.target).addClass("active");
+       displayTable(pageNum, "travel");
+   });
+
+}
 
 
 }

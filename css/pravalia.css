@@ -508,10 +508,14 @@ margin-bottom: 20px;
   
 }
 .banner_related {
-  background-color:#fff;
-  border:1px solid #eee;
-  padding-bottom: 0px;
-  margin-bottom: 20px;
+      background-color: #fff;
+    border: 1px solid #eee;
+    padding-bottom: 0px;
+    margin-bottom: 20px;
+    height: 296px;
+    text-align: center;
+    padding-top: 20px;
+}
   
 }
 .foto_more{
@@ -1401,6 +1405,81 @@ margin-left: -61px; }
 }
 .foto_cele_mai img{
   width: 100%
+}
+
+.input{
+  width: 100%;
+  height: 50px;
+  padding: 10px 15px;
+}
+.textarea{
+   width: 100%;
+  height: 150px;
+  padding: 10px 15px;
+}
+.trimite, .trimite:hover{
+    background-color: #cc3a3a;
+    height:   40px;
+    color:#fff;
+    display: block;
+    width:  150px;
+    line-height: 40px;
+    text-align: center;
+    font-size:  18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 15px;
+}
+.trimite, .trimite:hover{
+    background-color: #cc3a3a;
+    height:   40px;
+    color:#fff;
+    display: block;
+    width:  150px;
+    line-height: 40px;
+    text-align: center;
+    font-size:  18px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+
+.ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+ul.pagination li a.active {
+    background-color: #a50c0c;
+    color: white;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a {
+    border: 1px solid #ddd;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th,td {
+  padding: 15px;
+}
+.center {
+   margin: auto;
+   width: 50%;
+   padding: 10px;
 }
 
 
